@@ -1,206 +1,201 @@
-# ATS-Analyzer 📄✨
+# ATS-Analyzer
 
-An intelligent Applicant Tracking System (ATS) analyzer that evaluates resume compatibility with job descriptions using AI-powered analysis. This tool helps job seekers optimize their resumes to pass through ATS filters and improve their chances of landing interviews.
+An intelligent Applicant Tracking System (ATS) analyzer that evaluates resumes against job descriptions using AI-powered analysis. This tool helps job seekers optimize their resumes for better compatibility with ATS systems used by recruiters and hiring managers.
 
 ## 🚀 Features
 
-- **Resume Analysis**: Upload PDF resumes for comprehensive evaluation
-- **Job Description Matching**: Compare resumes against specific job requirements
-- **ATS Score Calculation**: Get percentage match scores for resume optimization
-- **Keyword Analysis**: Identify missing keywords and skills
-- **Improvement Suggestions**: Receive actionable feedback to enhance your resume
-- **User-Friendly Interface**: Clean and intuitive web-based interface
-- **Real-time Processing**: Fast analysis with immediate results
+- **Resume Analysis**: Parse and analyze resumes in various formats (PDF, DOCX, TXT)
+- **Job Description Matching**: Compare resumes against specific job descriptions
+- **Keyword Extraction**: Identify missing keywords crucial for job applications
+- **ATS Score Calculation**: Get a percentage match score for resume-job compatibility
+- **Improvement Suggestions**: Receive actionable recommendations to enhance your resume
+- **Skills Assessment**: Analyze and categorize technical and soft skills
+- **Entity Recognition**: Extract important entities like experience, education, and certifications
 
-## 🛠️ Technology Stack
+## 🛠️ Technologies Used
 
-- **Frontend**: Streamlit
-- **Backend**: Python
-- **AI/ML**: Google Gemini Pro / OpenAI GPT (AI-powered analysis)
-- **PDF Processing**: PyPDF2 / pdfplumber
-- **Additional Libraries**: 
-  - pandas
-  - numpy
-  - streamlit
-  - python-dotenv
+- **Python**: Core programming language
+- **Jupyter Notebook**: Interactive development environment
+- **Natural Language Processing (NLP)**: Text analysis and processing
+- **Machine Learning**: Resume scoring and matching algorithms
+- **PDF/Document Processing**: Resume parsing capabilities
+- **Streamlit** (if applicable): Web interface for user interaction
 
 ## 📋 Prerequisites
 
-Before running this application, make sure you have:
+Before running this project, ensure you have the following installed:
 
-- Python 3.8 or higher
-- pip package manager
-- API key for AI service (Google Gemini Pro or OpenAI)
+- Python 3.7 or higher
+- pip (Python package installer)
+- Jupyter Notebook or JupyterLab
 
-## ⚙️ Installation
+## 🔧 Installation
 
-1. **Clone the repository**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/Muhammadcodearif/ATS-Analyzer.git
    cd ATS-Analyzer
    ```
 
-2. **Create virtual environment** (recommended)
+2. **Create a virtual environment (recommended):**
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies**
+3. **Install required dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Set up environment variables**
+   If requirements.txt is not available, install common dependencies:
    ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` file and add your API keys:
-   ```
-   GOOGLE_API_KEY=your_google_gemini_api_key
-   # or
-   OPENAI_API_KEY=your_openai_api_key
+   pip install pandas numpy scikit-learn nltk spacy textblob
+   pip install pypdf2 python-docx streamlit plotly
+   pip install jupyter notebook
    ```
 
-## 🚀 Usage
-
-1. **Start the application**
+4. **Download required NLP models:**
    ```bash
-   streamlit run app.py
+   python -m spacy download en_core_web_sm
+   python -m nltk.downloader punkt stopwords
    ```
 
-2. **Open your browser** and navigate to `http://localhost:8501`
+## 🎯 Usage
 
-3. **Upload your resume** in PDF format
+### Running the Jupyter Notebook
 
-4. **Paste the job description** in the provided text area
+1. **Start Jupyter Notebook:**
+   ```bash
+   jupyter notebook
+   ```
 
-5. **Choose analysis type**:
-   - Resume Overview
-   - Percentage Match
-   - Missing Keywords
-   - Improvement Suggestions
+2. **Open the main notebook:**
+   - Navigate to `ATS_2.ipynb` in your browser
+   - Run cells sequentially to execute the analysis
 
-6. **Get your results** and optimize your resume accordingly!
+### Basic Usage Example
 
-## 📊 Analysis Features
+```python
+# Import necessary libraries
+from ats_analyzer import ATSAnalyzer
 
-### Resume Overview
-Get a comprehensive summary of your resume including:
-- Professional strengths
-- Key skills identified
-- Experience highlights
-- Areas for improvement
+# Initialize the analyzer
+analyzer = ATSAnalyzer()
 
-### Percentage Match
-Receive a numerical score (0-100%) indicating how well your resume aligns with the job description.
+# Load resume and job description
+resume_path = "path/to/your/resume.pdf"
+job_description = "Your job description text here..."
 
-### Missing Keywords
-Identify important keywords and skills from the job description that are missing from your resume.
+# Analyze resume
+results = analyzer.analyze_resume(resume_path, job_description)
 
-### Improvement Suggestions
-Get specific, actionable recommendations to enhance your resume's ATS compatibility.
+# View results
+print(f"ATS Score: {results['ats_score']}%")
+print(f"Missing Keywords: {results['missing_keywords']}")
+print(f"Recommendations: {results['recommendations']}")
+```
+
+## 📊 Output Features
+
+The ATS Analyzer provides comprehensive analysis including:
+
+- **Match Percentage**: Overall compatibility score between resume and job description
+- **Keyword Analysis**: 
+  - Found keywords in the resume
+  - Missing important keywords
+  - Keyword frequency analysis
+- **Skills Gap Analysis**: Identification of skills mentioned in JD but missing in resume
+- **Recommendations**: Specific suggestions to improve ATS compatibility
+- **Resume Summary**: AI-generated summary of the candidate's profile
+- **Visualization**: Charts and graphs showing analysis results
+
+## 🔍 How It Works
+
+1. **Text Extraction**: Extracts text from uploaded resume files
+2. **Preprocessing**: Cleans and normalizes text data
+3. **Keyword Matching**: Compares resume keywords with job description requirements
+4. **Scoring Algorithm**: Calculates compatibility score based on multiple factors:
+   - Keyword overlap
+   - Skills matching
+   - Experience relevance
+   - Education alignment
+5. **Analysis Generation**: Provides detailed feedback and recommendations
 
 ## 📁 Project Structure
 
 ```
 ATS-Analyzer/
-├── app.py                 # Main Streamlit application
-├── requirements.txt       # Python dependencies
-├── .env.example          # Environment variables template
-├── .gitignore           # Git ignore file
-├── README.md            # Project documentation
-├── utils/
-│   ├── __init__.py
-│   ├── pdf_processor.py # PDF text extraction
-│   ├── ai_analyzer.py   # AI analysis functions
-│   └── helpers.py       # Utility functions
-└── assets/
-    └── images/          # UI images and icons
+│
+├── ATS_2.ipynb              # Main Jupyter notebook
+├── requirements.txt         # Python dependencies
+├── data/                    # Sample data files
+│   ├── sample_resumes/
+│   └── job_descriptions/
+├── models/                  # Trained models (if any)
+├── utils/                   # Utility functions
+│   ├── text_processing.py
+│   ├── keyword_extraction.py
+│   └── scoring.py
+├── assets/                  # Images and other assets
+└── README.md               # Project documentation
 ```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-# Google Gemini Pro (recommended)
-GOOGLE_API_KEY=your_google_api_key_here
-
-# Alternative: OpenAI GPT
-OPENAI_API_KEY=your_openai_api_key_here
-
-# App Configuration
-DEBUG=False
-MAX_FILE_SIZE=10  # MB
-SUPPORTED_FORMATS=pdf
-```
-
-### API Key Setup
-
-#### Google Gemini Pro (Recommended)
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key
-3. Add it to your `.env` file
-
-#### OpenAI Alternative
-1. Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-2. Create a new API key
-3. Add it to your `.env` file
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
+We welcome contributions to improve the ATS-Analyzer! Here's how you can contribute:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork the repository**
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Commit your changes:**
+   ```bash
+   git commit -m 'Add some amazing feature'
+   ```
+4. **Push to the branch:**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. **Open a Pull Request**
 
-## 📝 License
+## 📈 Roadmap
+
+- [ ] Support for more resume formats
+- [ ] Integration with job portal APIs
+- [ ] Real-time resume optimization suggestions
+- [ ] Machine learning model improvements
+- [ ] Multi-language support
+- [ ] Resume template recommendations
+- [ ] Bulk resume processing
+
+## 🐛 Issues and Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Issues](https://github.com/Muhammadcodearif/ATS-Analyzer/issues) page
+2. Create a new issue with detailed description
+3. Include error logs and system information
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🐛 Issues
-
-If you encounter any issues or have suggestions, please [create an issue](https://github.com/Muhammadcodearif/ATS-Analyzer/issues) on GitHub.
-
 ## 🙏 Acknowledgments
 
-- Google Gemini Pro for AI-powered analysis
-- Streamlit for the amazing web framework
-- The open-source community for inspiration
+- Thanks to the open-source community for NLP libraries
+- Inspired by modern ATS systems and recruitment processes
+- Built with the goal of helping job seekers succeed
 
 ## 📞 Contact
 
-- **Developer**: Muhammad Arif
+- **Author**: Muhammad Code Arif
 - **GitHub**: [@Muhammadcodearif](https://github.com/Muhammadcodearif)
-- **Project Link**: [https://github.com/Muhammadcodearif/ATS-Analyzer](https://github.com/Muhammadcodearif/ATS-Analyzer)
+- **Project Link**: [ATS-Analyzer](https://github.com/Muhammadcodearif/ATS-Analyzer)
 
 ---
 
-⭐ **If this project helped you, please give it a star!** ⭐
+⭐ **Star this repository if you find it helpful!**
 
-## 🚀 Quick Start Example
-
-```python
-# Example usage in your own code
-from utils.ai_analyzer import analyze_resume
-from utils.pdf_processor import extract_text
-
-# Extract text from PDF
-resume_text = extract_text("path/to/resume.pdf")
-job_description = "Your job description here..."
-
-# Analyze resume
-result = analyze_resume(resume_text, job_description)
-print(f"Match Score: {result['score']}%")
-print(f"Suggestions: {result['suggestions']}")
-```
-
----
-
-**Happy Job Hunting! 🎯**
+*Made with ❤️ to help job seekers optimize their resumes for ATS systems*
